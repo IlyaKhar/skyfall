@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyfall — Рассчитать стоимость</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Forum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <style>
+      /* Элегантный бело-серый фон */
+      body {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Тонкие декоративные элементы */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: rgba(100, 116, 139, 0.1);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      .particle:nth-child(odd) {
+        animation-delay: -3s;
+        background: rgba(148, 163, 184, 0.08);
+      }
+
+      .particle:nth-child(even) {
+        animation-delay: -6s;
+        background: rgba(71, 85, 105, 0.06);
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+        50% { transform: translateY(-80px) rotate(180deg); opacity: 0.3; }
+      }
+
+      /* Контейнер */
+      .container {
+        max-width: 1200px;
+        margin: 120px auto 40px;
+        padding: 0 16px;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Элегантный заголовок */
+      .main-title {
+        text-align: center;
+        font-family: 'Oswald', sans-serif;
+        color: #0f172a;
+        font-size: clamp(42px, 5vw, 64px);
+        margin: 0 0 50px 0;
+        font-weight: 400;
+        letter-spacing: -1px;
+        position: relative;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .main-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #475569, #64748b);
+        border-radius: 2px;
+      }
+
+      /* Стильная карточка */
+      .calc-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 20px;
+        padding: 50px;
+        box-shadow: 
+          0 10px 25px rgba(0, 0, 0, 0.08),
+          0 4px 12px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .calc-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
+      }
+
+      .calc-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 20px 40px rgba(0, 0, 0, 0.12),
+          0 8px 20px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border-color: rgba(176, 176, 176, 0.3);
+      }
+
+      /* Сетка полей */
+      .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        margin-bottom: 45px;
+      }
+
+      .calc-grid .full {
+        grid-column: 1 / -1;
+      }
+
+      /* Стили для полей ввода */
+      .field-group {
+        position: relative;
+      }
+
+      label {
+        font-family: 'Forum', sans-serif;
+        font-size: 14px;
+        margin-bottom: 12px;
+        display: block;
+        color: #1e293b;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      input, select {
+        width: 100%;
+        height: 50px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 0 16px;
+        font-size: 15px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #1e293b;
+        transition: all 0.3s ease;
+        font-family: 'Forum', sans-serif;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        font-weight: 500;
+      }
+
+      input::placeholder {
+        color: #64748b;
+      }
+
+      input:focus, select:focus {
+        outline: none;
+        border-color: #475569;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+      }
+
+      select option {
+        background: #ffffff;
+        color: #1e293b;
+        padding: 10px;
+        font-weight: 500;
+      }
+
+      /* Интерактивные кнопки */
+      .actions {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .btn-primary, .btn-secondary {
+        padding: 16px 24px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: 'Forum', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        position: relative;
+        overflow: hidden;
+        width: 280px;
+        height: 56px;
+        box-sizing: border-box;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 4px 12px rgba(71, 85, 105, 0.25);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(71, 85, 105, 0.35);
+        background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.95);
+        color: #1e293b;
+        border: 2px solid #475569;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 1);
+        border-color: #334155;
+        color: #0f172a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Результат расчета */
+      .result {
+        margin-top: 24px;
+        padding: 28px;
+        background: rgba(248, 250, 252, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        font-family: 'Forum', sans-serif;
+        font-size: 18px;
+        color: #1e293b;
+        text-align: center;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .result.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Анимированные иконки */
+      .icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .btn-primary:hover .icon {
+        transform: rotate(360deg);
+      }
+
+      /* Адаптивность */
+      @media (max-width: 768px) {
+        .container {
+          margin: 100px auto 40px;
+          padding: 0 12px;
+        }
+
+        .calc-card {
+          padding: 30px;
+          border-radius: 16px;
+        }
+
+        .calc-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .actions {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn-primary, .btn-secondary {
+          width: 100%;
+          height: 56px;
+          min-width: auto;
+          justify-content: center;
+        }
+
+        .main-title {
+          font-size: clamp(36px, 8vw, 56px);
+          margin-bottom: 40px;
+        }
+      }
+
+      /* Дополнительные анимации */
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .calc-card {
+        animation: slideInUp 0.8s ease-out;
+      }
+
+      .field-group:nth-child(1) { animation: slideInUp 0.8s ease-out 0.1s both; }
+      .field-group:nth-child(2) { animation: slideInUp 0.8s ease-out 0.2s both; }
+      .field-group:nth-child(3) { animation: slideInUp 0.8s ease-out 0.3s both; }
+      .field-group:nth-child(4) { animation: slideInUp 0.8s ease-out 0.4s both; }
+      .field-group:nth-child(5) { animation: slideInUp 0.8s ease-out 0.5s both; }
+    </style>
+</head>
+<body>
+  <!-- Анимированные частицы -->
+  <div class="particles" id="particles"></div>
+
+    <!-- Современная стеклянная навигация -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index2.html">О компании</a>
+            <a href="index3.html">Визы</a>
+        </div>
+        <a href="../index.html" class="logo">SKYFALL</a>
+        <div class="nav-links">
+            <a href="tours.html">Туры</a>
+            <a href="index5.html">Путеводитель</a>
+            <a href="contact.html">Контакты</a>
+        </div>
+    </nav>
+
+    <!-- Бургер-меню для мобильных -->
+    <div class="burger-menu" id="burgerMenu">
+        <div class="burger-icon" id="burgerIcon">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" class="logo">skyfall</a>
+        <div class="nav-links">
+            <a href="index2.html">О КОМПАНИИ</a>
+            <a href="index3.html">ВИЗА</a>
+            <a href="tours.html">ТУРЫ</a>
+            <a href="index5.html">ПУТЕВОДИТЕЛЬ</a>
+            <a href="contact.html">КОНТАКТЫ</a>
+        </div>
+    </div>
+
+    <!-- Оверлей для мобильного меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+  <div class="container">
+    <h1 class="main-title">Рассчитать стоимость</h1>
+    <div class="calc-card">
+      <form id="calcForm">
+        <div class="calc-grid">
+          <div class="field-group">
+            <label> Город прибытия</label>
+            <select name="city">
+              <option value="tokyo">Токио</option>
+              <option value="osaka">Осака</option>
+              <option value="sapporo">Саппоро</option>
+              <option value="kyoto">Киото</option>
+              <option value="nara">Нара</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label> Длительность (дней)</label>
+            <input type="number" min="3" max="30" name="days" value="7" placeholder="Выберите количество дней">
+          </div>
+          <div class="field-group">
+            <label> Количество человек</label>
+            <input type="number" min="1" max="10" name="people" value="2" placeholder="Сколько путешественников">
+          </div>
+          <div class="field-group">
+            <label> Класс размещения</label>
+            <select name="class">
+              <option value="standard">Стандарт</option>
+              <option value="comfort">Комфорт</option>
+              <option value="lux">Люкс</option>
+              <option value="premium">Премиум</option>
+            </select>
+          </div>
+          <div class="field-group full">
+            <label> Дополнительные услуги</label>
+            <select name="extras">
+              <option value="none">Без доп. услуг</option>
+              <option value="guide">Личный гид</option>
+              <option value="food">Гастротур</option>
+              <option value="onsen">Онсэн-пакет</option>
+              <option value="culture">Культурная программа</option>
+              <option value="photography">Фотосессия</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" id="calcBtn" class="btn-primary">
+            Рассчитать стоимость
+          </button>
+          <a class="btn-secondary" href="index4.html">
+            Смотреть туры
+          </a>
+        </div>
+        <div class="result" id="calcResult"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Создание анимированных частиц
+      createParticles();
+      
+      const form = document.getElementById('calcForm');
+      const result = document.getElementById('calcResult');
+      const calcBtn = document.getElementById('calcBtn');
+      
+      // Интерактивные эффекты для полей
+      const inputs = document.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          input.parentElement.style.transform = 'translateY(-2px)';
+          input.parentElement.style.transition = 'transform 0.3s ease';
+        });
+        
+        input.addEventListener('blur', () => {
+          input.parentElement.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Улучшенная функция расчета
+      calcBtn.addEventListener('click', () => {
+        // Анимация кнопки
+        calcBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          calcBtn.style.transform = 'scale(1)';
+        }, 150);
+
+        // Получение данных формы
+        const formData = new FormData(form);
+        const days = Math.max(3, Math.min(30, Number(formData.get('days') || 7)));
+        const people = Math.max(1, Math.min(10, Number(formData.get('people') || 2)));
+        const city = formData.get('city');
+        const cls = formData.get('class');
+        const extras = formData.get('extras');
+
+        // Расширенная модель цены
+        const cityMultiplier = {
+          tokyo: 1.2,
+          osaka: 1.1,
+          sapporo: 0.9,
+          kyoto: 1.0,
+          nara: 0.95
+        };
+
+        const basePerDay = {
+          standard: 180,
+          comfort: 260,
+          lux: 380,
+          premium: 500
+        }[cls] || 180;
+
+        const extrasCost = {
+          none: 0,
+          guide: 80,
+          food: 60,
+          onsen: 50,
+          culture: 70,
+          photography: 90
+        }[extras] || 0;
+
+        const subtotal = (basePerDay + extrasCost) * days * people * (cityMultiplier[city] || 1);
+        const service = Math.round(subtotal * 0.08);
+        const discount = days >= 10 ? Math.round(subtotal * 0.05) : 0;
+        const total = subtotal + service - discount;
+
+        // Форматирование чисел
+        const format = (n) => n.toLocaleString('ru-RU');
+
+        // Создание красивого результата
+        let resultHTML = `
+          <div style="margin-bottom: 16px; font-size: 22px; color: #059669; font-weight: 600;">💰 Стоимость путешествия</div>
+          <div style="margin-bottom: 8px; color: #475569;">Базовая стоимость: <strong>${format(Math.round(subtotal))} USD</strong></div>
+          ${discount > 0 ? `<div style="margin-bottom: 8px; color: #059669;">Скидка за длительность: <strong>-${format(discount)} USD</strong></div>` : ''}
+          <div style="margin-bottom: 8px; color: #475569;">Сервисный сбор: <strong>${format(service)} USD</strong></div>
+          <div style="border-top: 2px solid rgba(148, 163, 184, 0.3); padding-top: 16px; margin-top: 16px; font-size: 26px; color: #1e293b; font-weight: 700;">
+            ИТОГО: <strong>${format(total)} USD</strong>
+          </div>
+          <div style="margin-top: 12px; font-size: 14px; color: #64748b;">
+            *Цены могут варьироваться в зависимости от сезона
+          </div>
+        `;
+
+        // Показ результата с анимацией
+        result.innerHTML = resultHTML;
+        result.classList.add('show');
+
+        // Создание конфетти при хорошей цене
+        if (total < 2000) {
+          createConfetti();
+        }
+      });
+
+      // Функция создания частиц
+      function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.animationDelay = Math.random() * 6 + 's';
+          particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+          particlesContainer.appendChild(particle);
+        }
+      }
+
+      // Функция создания конфетти
+      function createConfetti() {
+        const colors = ['#64748b', '#94a3b8', '#cbd5e1', '#475569', '#334155'];
+        const confettiCount = 25;
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.top = '-10px';
+          confetti.style.zIndex = '1000';
+          confetti.style.borderRadius = '50%';
+          confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
+          
+          document.body.appendChild(confetti);
+
+          setTimeout(() => {
+            confetti.remove();
+          }, 4000);
+        }
+      }
+
+      // Добавление CSS анимации для конфетти
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes confettiFall {
+          to {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+
+  <!-- Новый красивый футер -->
+  <footer class="modern-footer">
+    <!-- Анимированный фон с частицами -->
+    <div class="footer-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Градиентный переход -->
+    <div class="footer-gradient"></div>
+    
+    <!-- Основной контент футера -->
+    <div class="footer-content">
+      <div class="footer-main">
+        <!-- Логотип и описание -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="logo-text">SKYFALL</span>
+            <div class="logo-accent"></div>
+          </div>
+          <p class="brand-tagline">Путешествия в Японию</p>
+          <p class="brand-description">Откройте для себя страну восходящего солнца</p>
+          <div class="brand-decoration"></div>
+        </div>
+
+        <!-- Навигация -->
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul class="nav-links">
+            <li><a href="index2.html" class="nav-link">О компании</a></li>
+            <li><a href="index3.html" class="nav-link">Визы</a></li>
+            <li><a href="tours.html" class="nav-link">Туры</a></li>
+            <li><a href="index5.html" class="nav-link">Путеводитель</a></li>
+            <li><a href="contact.html" class="nav-link">Контакты</a></li>
+          </ul>
+        </div>
+
+        <!-- Контакты -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon phone">📞</div>
+              <span>8 (800) 700-85-49</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon email">✉️</div>
+              <a href="mailto:info@skyfall.ru">info@skyfall.ru</a>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon location">📍</div>
+              <span>г. Санкт-Петербург, ул. Ивана Зубкова, 10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Социальные сети -->
+        <div class="footer-social">
+          <h4>Социальные сети</h4>
+          <div class="social-grid">
+            <a href="#" class="social-card telegram">
+              <div class="social-icon"></div>
+              <span>Telegram</span>
+            </a>
+            <a href="#" class="social-card vk">
+              <div class="social-icon"></div>
+              <span>VK</span>
+            </a>
+            <a href="#" class="social-card instagram">
+              <div class="social-icon"></div>
+              <span>Instagram</span>
+            </a>
+            <a href="#" class="social-card twitter">
+              <div class="social-icon"></div>
+              <span>Twitter</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Копирайт -->
+      <div class="footer-bottom-modern">
+        <div class="copyright-content">
+          <p class="copyright">© 2025 SKYFALL. Все права защищены.</p>
+          <p class="made-with">Создано с <span class="heart"></span> для любителей Японии</p>
+        </div>
+        <div class="footer-decoration">
+          <div class="wave"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyfall — Путешествия в Японию</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Forum&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="assets/js/main.js" defer></script>
+    <style>
+        /* Минималистичный фон */
+        body {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(248, 250, 252, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(241, 245, 249, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Плавающие частицы */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 12s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .particle:nth-child(odd) {
+            animation-delay: -4s;
+            background: rgba(248, 250, 252, 0.6);
+        }
+
+        .particle:nth-child(even) {
+            animation-delay: -8s;
+            background: rgba(241, 245, 249, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Стеклянная навигация */
+        /* Современная стеклянная навигация */
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Стили для навигационных ссылок */
+        .navbar .nav-links a {
+            color: rgba(0, 0, 0, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .navbar .nav-links a:hover {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Стили для логотипа */
+        .navbar .logo {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Активная ссылка */
+        .navbar .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        /* Стили для контейнера навигации */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            gap: 40px;
+        }
+        
+        .navbar .nav-links:first-child {
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .navbar .logo {
+            flex: 0 0 auto;
+            margin: 0;
+        }
+        
+        .navbar .nav-links:last-child {
+            flex: 1;
+            justify-content: flex-start;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+                height: 80px;
+                gap: 15px;
+            }
+            
+            .navbar .nav-links {
+                display: none;
+            }
+            
+            .navbar .logo {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 15px;
+                height: 70px;
+                gap: 10px;
+            }
+            
+            .navbar .logo {
+                font-size: 24px;
+            }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Стили для секции призыва к действию */
+        .cta-section {
+            display: flex;
+            gap: 25px;
+            margin-top: 50px;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        .action-btn {
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .book-tour {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        .book-tour:hover {
+            transform: perspective(1000px) rotateX(-5deg) translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            background: #f8f9fa;
+            border-color: #333333;
+        }
+        
+        .view-tours {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        .view-tours:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            background: #f8f9fa;
+            border-color: #333333;
+        }
+        
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .action-btn:hover::before {
+            left: 100%;
+        }
+        
+        .action-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+        }
+        
+        .action-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Адаптивность для кнопок */
+        @media (max-width: 768px) {
+            .cta-section {
+                flex-direction: column;
+                gap: 20px;
+                margin-top: 35px;
+                align-items: center;
+            }
+            
+            .action-btn {
+                padding: 16px 32px;
+                font-size: 14px;
+                letter-spacing: 1.5px;
+                min-width: 250px;
+                transform: none !important;
+            }
+            
+            .action-btn:hover {
+                transform: translateY(-5px) scale(1.02) !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cta-section {
+                margin-top: 30px;
+                gap: 15px;
+            }
+            
+            .action-btn {
+                padding: 14px 28px;
+                font-size: 13px;
+                letter-spacing: 1px;
+                min-width: 220px;
+            }
+        }
+
+        /* Главный контейнер */
+        .main-hero {
+            padding: 120px 20px 80px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-hero h1 {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 30px 0;
+            font-family: 'Oswald', sans-serif;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .main-hero .subtitle {
+            font-size: clamp(18px, 3vw, 28px);
+            color: #64748b;
+            margin: 0 0 50px 0;
+            font-weight: 300;
+            line-height: 1.4;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Стеклянные карточки */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Сетка карточек */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Специальные карточки */
+        .feature-card {
+            text-align: center;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #C16548, #8B4513);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(193, 101, 72, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 15px 0;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Статистика */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-item {
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.1s; }
+        .stat-item:nth-child(2) { animation-delay: 0.2s; }
+        .stat-item:nth-child(3) { animation-delay: 0.3s; }
+        .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-number {
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 700;
+            color: #C16548;
+            font-family: 'Oswald', sans-serif;
+            margin: 0 0 10px 0;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Кнопки */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: rgba(255,255,255,0.98);
+            color: #4a5568;
+            padding: 18px 40px;
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 9999px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before { content: none; }
+        .btn-primary:hover { background: rgba(255,255,255,0.99); border-color: #667eea; transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.16); }
+        .btn-primary:active { transform: translateY(-1px) scale(.99); }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.98);
+            color: #4a5568;
+            padding: 18px 40px;
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 9999px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.99); border-color: #667eea; transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.16); }
+        .btn-secondary:active { transform: translateY(-1px) scale(.99); }
+
+        /* Увеличенные капсулы в hero */
+        .main-hero .btn-primary,
+        .main-hero .btn-secondary {
+            height: 72px;
+            padding: 0 36px;
+            border-radius: 9999px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .main-hero {
+                text-align: center;
+                padding: 100px 20px 60px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+
+        /* Зеркальные боковые надписи */
+        .side-headlines {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 0;
+        }
+        .side-text {
+            position: absolute;
+            top: 40px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: clamp(28px, 4vw, 48px);
+            line-height: 1;
+            color: #000000;
+            opacity: 0.15;
+            letter-spacing: 2px;
+            user-select: none;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .side-text.left { left: 0; }
+        .side-text.right { right: 0; text-align: right; }
+        .side-text.center { left: 50%; transform: translateX(-50%); text-align: center; }
+        @media (max-width: 768px) {
+            .side-text { display: none; }
+        }
+
+        /* ===== Улучшения блока «Рассчитать стоимость» на главной ===== */
+        .booking-section .calc-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+            position: relative;
+            overflow: hidden;
+        }
+        /* мягкая подсветка при наведении */
+        .booking-section .calc-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 20px;
+            background: radial-gradient(1200px 1200px at var(--mx, 50%) var(--my, 0%), rgba(193,101,72,.12), transparent 60%);
+            pointer-events: none;
+        }
+        .booking-section .calc-grid {
+            display: grid;
+            gap: 24px 32px; /* row-gap / column-gap */
+            margin-bottom: 24px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-areas:
+                'days people class city'
+                'extras extras extras extras';
+        }
+        /* Переупорядочивание полей без изменения HTML */
+        .booking-section .calc-grid .field-group:nth-child(1) { grid-area: city; }
+        .booking-section .calc-grid .field-group:nth-child(2) { grid-area: days; }
+        .booking-section .calc-grid .field-group:nth-child(3) { grid-area: people; }
+        .booking-section .calc-grid .field-group:nth-child(4) { grid-area: class; }
+        .booking-section .calc-grid .full { grid-area: extras; }
+        .booking-section .field-group { position: relative; }
+        /* стрелка для select */
+        .booking-section .field-group:has(select)::after {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            transform: translateY(-50%) rotate(45deg);
+            border-right: 2px solid #475569;
+            border-bottom: 2px solid #475569;
+            opacity: .6;
+            pointer-events: none;
+        }
+        .booking-section label {
+            font-family: 'Forum', sans-serif;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: block;
+            color: #1e293b;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+        .booking-section input, .booking-section select {
+            width: 100%;
+            height: 48px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 0 14px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            font-family: 'Forum', sans-serif;
+            transition: all .3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,.05);
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .booking-section input:hover, .booking-section select:hover {
+            border-color: #94a3b8;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        }
+        .booking-section input:focus, .booking-section select:focus {
+            outline: none;
+            border-color: #475569;
+            box-shadow: 0 0 0 3px rgba(71,85,105,.1), 0 2px 6px rgba(0,0,0,.08);
+            transform: translateY(-1px);
+        }
+        /* скрываем стандартные стрелки у number в разных браузерах */
+        .booking-section input[type="number"]::-webkit-outer-spin-button,
+        .booking-section input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .booking-section input[type="number"] { -moz-appearance: textfield; }
+
+        /* особый стиль для select */
+        .booking-section select { padding-right: 36px; cursor: pointer; }
+
+        /* плавный градиент границы при фокусе */
+        .booking-section input:focus, .booking-section select:focus {
+            border-image: linear-gradient(90deg, #C16548, #8B4513) 1;
+            border-width: 1px;
+        }
+        .booking-section .actions {
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+                'primary secondary1'
+                'primary secondary2';
+            gap: 16px 18px;
+            align-items: stretch;
+            margin-top: 8px;
+        }
+        .booking-section #calcBtn { grid-area: primary; }
+        .booking-section .actions a.btn-secondary:first-of-type { grid-area: secondary1; }
+        .booking-section .actions a.btn-secondary:last-of-type { grid-area: secondary2; }
+        .booking-section #calcBtn { font-size: 16px; letter-spacing: .8px; }
+        .booking-section .btn-primary,
+        .booking-section .btn-secondary {
+            height: 56px;
+            padding: 0 28px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            min-width: 180px;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .booking-section .btn-primary { 
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .booking-section .btn-primary:hover { 
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .booking-section .btn-secondary {
+            background: rgba(255,255,255,0.98);
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            color: #4a5568;
+        }
+        
+        .booking-section .btn-secondary:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        }
+        .booking-section .result {
+            margin-top: 14px;
+            padding: 22px;
+            background: rgba(248,250,252,0.9);
+            border: 1px solid rgba(148,163,184,0.2);
+            border-radius: 16px;
+            font-family: 'Forum', sans-serif;
+            font-size: 18px;
+            color: #1e293b;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: all .5s ease;
+        }
+        .booking-section .result.show { opacity: 1; transform: translateY(0); }
+        /* адаптив: один столбец и компактные поля */
+        @media (max-width: 1024px) {
+            .booking-section .calc-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-areas:
+                    'city days'
+                    'people class'
+                    'extras extras';
+            }
+            .booking-section .actions {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width: 768px) {
+            .booking-section .calc-card { padding: 28px; }
+            .booking-section .btn-primary, .booking-section .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                height: 56px;
+            }
+            .booking-section .calc-grid {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    'city'
+                    'days'
+                    'people'
+                    'class'
+                    'extras';
+            }
+        }
+
+        /* ===== Отзывы ===== */
+        .reviews-section {
+            padding: 80px 0 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        .reviews-header { max-width: 1200px; margin: 0 auto 24px; padding: 0 20px; }
+        .reviews-header .section-title { margin-bottom: 10px; }
+        .reviews-header .subtitle { color: #64748b; max-width: 720px; }
+        .reviews-carousel { max-width: 1200px; margin: 0 auto; position: relative; }
+        .reviews-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: calc(33.333% - 16px);
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 10px 20px 30px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .reviews-track::-webkit-scrollbar { height: 8px; }
+        .reviews-track::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 8px; }
+        .review-card {
+            scroll-snap-align: start;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            display: flex; flex-direction: column; gap: 14px;
+            min-height: 220px;
+        }
+        .review-head { display: flex; align-items: center; gap: 12px; }
+        .review-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .review-name { font-weight: 700; color: #1a1a1a; font-family: 'Oswald', sans-serif; }
+        .review-meta { font-size: 12px; color: #64748b; }
+        .review-text { color: #334155; line-height: 1.6; font-family: 'Forum', sans-serif; }
+        .stars { color: #F59E0B; letter-spacing: 1px; }
+        .reviews-nav { position: absolute; inset: 0; pointer-events: none; }
+        .reviews-btn {
+            pointer-events: all;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.06);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .reviews-btn:hover { transform: translateY(-50%) scale(1.05); }
+        .reviews-btn.prev { left: 8px; }
+        .reviews-btn.next { right: 8px; }
+        @media (max-width: 992px) { .reviews-track { grid-auto-columns: calc(50% - 12px); } }
+        @media (max-width: 640px) { .reviews-track { grid-auto-columns: 100%; } .reviews-btn { display:none; } }
+    </style>
+</head>
+<body>
+    <!-- Плавающие частицы -->
+    <div class="floating-particles" id="particles"></div>
+
+ <!-- Навигация -->
+    <!-- Современная стеклянная навигация -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="pages/index2.html">О компании</a>
+            <a href="pages/index3.html">Визы</a>
+        </div>
+        <a href="index.html" class="logo">SKYFALL</a>
+        <div class="nav-links">
+            <a href="pages/tours.html">Туры</a>
+            <a href="pages/index5.html">Путеводитель</a>
+            <a href="pages/contact.html">Контакты</a>
+        </div>
+    </nav>
+
+    <!-- Бургер-меню для мобильных -->
+    <div class="burger-menu" id="burgerMenu">
+        <div class="burger-icon" id="burgerIcon">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="logo">skyfall</a>
+        <div class="nav-links">
+            <a href="pages/index2.html">О КОМПАНИИ</a>
+            <a href="pages/index3.html">ВИЗА</a>
+            <a href="pages/tours.html">ТУРЫ</a>
+            <a href="pages/index5.html">ПУТЕВОДИТЕЛЬ</a>
+            <a href="pages/contact.html">КОНТАКТЫ</a>
+        </div>
+    </div>
+
+    <!-- Оверлей для мобильного меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <div class="baner">
+    </div>
+
+    <!-- Зеркальные боковые надписи -->
+    <div class="side-headlines">
+        <div class="side-text center">ТУРЫ В ЯПОНИЮ</div>
+    </div>
+
+    <!-- Главная секция -->
+    <section class="main-hero">
+        <h1>ДОБРО<br>ПОЖАЛОВАТЬ<br>В ЯПОНИЮ</h1>
+        <p class="subtitle">Откройте удивительную Японию: подскажем маршрут, оформим визу, подберём туры под ваш ритм. Ваше путешествие начинается здесь.</p>
+        
+        <!-- Кнопки действий -->
+        <div class="cta-section">
+            <a href="pages/booking.html" class="action-btn book-tour">ЗАБРОНИРОВАТЬ ТУР</a>
+            <a href="pages/tours.html" class="action-btn view-tours">ПОСМОТРЕТЬ ТУРЫ</a>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews-section">
+        <div class="reviews-header">
+            <h2 class="section-title">Что говорят <span class="highlight">клиенты</span></h2>
+            <p class="subtitle">Короткие впечатления о поездках с нами — маршруты, забота, внимание к деталям и эмоции, ради которых мы всё делаем.</p>
+        </div>
+        <div class="reviews-carousel">
+            <div class="reviews-track" id="reviewsTrack">
+                <div class="review-card">
+                    <div class="review-head">
+                        <img class="review-avatar" src="img/photo_2025-05-29_11-12-45.jpg" alt="Анна">
+                        <div>
+                            <div class="review-name">Анна К.</div>
+                            <div class="review-meta">Токио — Киото — Осака</div>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">Идеально выстроили маршрут под наши даты. Отели топ, логистика — без единой задержки. Отдельное спасибо за гастро-подборку и онсэны!</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-head">
+                        <img class="review-avatar" src="img/9687d2de1b87ffc8a9e2149b8ff7483c.jpg" alt="Дмитрий">
+                        <div>
+                            <div class="review-name">Дмитрий Н.</div>
+                            <div class="review-meta">Зимняя Саппоро + онсэн</div>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">Поддержка 24/7 — чувствовалось внимание ко всем мелочам. Лыжи, крабы, онсэны — лучшая зима в жизни.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-head">
+                        <img class="review-avatar" src="img/808f78decd09c0ccb5dd7a1b1aaaafbf.jpg" alt="Мария">
+                        <div>
+                            <div class="review-name">Мария П.</div>
+                            <div class="review-meta">Сакура-тур</div>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">Поймали цветение в самых красивых местах. Гид — волшебница, фото — как из открытки. Спасибо, вернёмся осенью!</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-head">
+                        <img class="review-avatar" src="img/b0790187c94d9bd845da9e153208ce1b.jpg" alt="Егор">
+                        <div>
+                            <div class="review-name">Егор С.</div>
+                            <div class="review-meta">Авторский маршрут</div>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">Хочу выделить визовую поддержку — всё чётко и заранее. Маршрут нестандартный, но реализовали на 100%.</div>
+                </div>
+            </div>
+            <div class="reviews-nav">
+                <button class="reviews-btn prev" id="reviewsPrev" aria-label="Назад">‹</button>
+                <button class="reviews-btn next" id="reviewsNext" aria-label="Вперёд">›</button>
+            </div>
+        </div>
+    </section>
+    <!-- Лента прокрутки фото -->
+    <section class="marquee-container" aria-label="Фотолента Японии">
+        <div class="marquee">
+            <img src="img/phot1.jpg" alt="Токио">
+            <img src="img/phot2.jpg" alt="Киото">
+            <img src="img/phot3.jpg" alt="Осака">
+            <img src="img/photo11.jpg" alt="Храм">
+            <img src="img/photo22.jpg" alt="Сакура">
+            <img src="img/photo33.jpg" alt="Горы">
+            <img src="img/photo44.jpg" alt="Улицы">
+            <img src="img/photo55.jpg" alt="Парк">
+        </div>
+    </section>
+
+    <!-- Букинг (интеграция калькулятора со страницы booking) -->
+    <section class="booking-section" id="booking">
+        <div class="container" style="max-width:1200px;">
+            <h2 class="section-title">Рассчитать <span class="highlight">стоимость</span></h2>
+            <p class="subtitle" style="text-align:left; max-width:720px; margin:0 0 24px 0;">
+                За пару кликов получите ориентировочную стоимость тура с учётом города прибытия,
+                длительности, класса размещения и доп. услуг. Для точной сметы и подбора дат
+                можете перейти в полную форму букинга.
+            </p>
+            <div class="calc-card">
+                <form id="calcForm">
+                    <div class="calc-grid">
+                        <div class="field-group">
+                            <label>Город прибытия</label>
+                            <select name="city">
+                                <option value="tokyo">Токио</option>
+                                <option value="osaka">Осака</option>
+                                <option value="sapporo">Саппоро</option>
+                                <option value="kyoto">Киото</option>
+                                <option value="nara">Нара</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Длительность (дней)</label>
+                            <input type="number" min="3" max="30" name="days" value="7" placeholder="Выберите количество дней">
+                        </div>
+                        <div class="field-group">
+                            <label>Количество человек</label>
+                            <input type="number" min="1" max="10" name="people" value="2" placeholder="Сколько путешественников">
+                        </div>
+                        <div class="field-group">
+                            <label>Класс размещения</label>
+                            <select name="class">
+                                <option value="standard">Стандарт</option>
+                                <option value="comfort">Комфорт</option>
+                                <option value="lux">Люкс</option>
+                                <option value="premium">Премиум</option>
+                            </select>
+                        </div>
+                        <div class="field-group full">
+                            <label>Дополнительные услуги</label>
+                            <select name="extras">
+                                <option value="none">Без доп. услуг</option>
+                                <option value="guide">Личный гид</option>
+                                <option value="food">Гастротур</option>
+                                <option value="onsen">Онсэн-пакет</option>
+                                <option value="culture">Культурная программа</option>
+                                <option value="photography">Фотосессия</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" id="calcBtn" class="btn-primary">
+                            Рассчитать стоимость
+                        </button>
+                        <a class="btn-secondary" href="pages/tours.html">
+                            <span>Смотреть туры</span>
+                        </a>
+                        <a class="btn-secondary" href="pages/booking.html">
+                            <span>Открыть полную форму</span>
+                        </a>
+                    </div>
+                    <div class="result" id="calcResult"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+  <!-- Новый красивый футер -->
+  <footer class="modern-footer">
+    <!-- Анимированный фон с частицами -->
+    <div class="footer-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Градиентный переход -->
+    <div class="footer-gradient"></div>
+    
+    <!-- Основной контент футера -->
+    <div class="footer-content">
+      <div class="footer-main">
+        <!-- Логотип и описание -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="logo-text">SKYFALL</span>
+            <div class="logo-accent"></div>
+          </div>
+          <p class="brand-tagline">Путешествия в Японию</p>
+          <p class="brand-description">Откройте для себя страну восходящего солнца</p>
+          <div class="brand-decoration"></div>
+        </div>
+
+        <!-- Навигация -->
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul class="nav-links">
+            <li><a href="pages/index2.html" class="nav-link">О компании</a></li>
+            <li><a href="pages/index3.html" class="nav-link">Визы</a></li>
+            <li><a href="pages/tours.html" class="nav-link">Туры</a></li>
+            <li><a href="pages/index5.html" class="nav-link">Путеводитель</a></li>
+            <li><a href="pages/contact.html" class="nav-link">Контакты</a></li>
+          </ul>
+        </div>
+
+        <!-- Контакты -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon phone">📞</div>
+              <span>8 (800) 700-85-49</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon email">✉️</div>
+              <a href="mailto:info@skyfall.ru">info@skyfall.ru</a>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon location">📍</div>
+              <span>г. Санкт-Петербург, ул. Ивана Зубкова, 10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Социальные сети -->
+        <div class="footer-social">
+          <h4>Социальные сети</h4>
+          <div class="social-grid">
+            <a href="#" class="social-card telegram">
+              <div class="social-icon"></div>
+              <span>Telegram</span>
+            </a>
+            <a href="#" class="social-card vk">
+              <div class="social-icon"></div>
+              <span>VK</span>
+            </a>
+            <a href="#" class="social-card instagram">
+              <div class="social-icon"></div>
+              <span>Instagram</span>
+            </a>
+            <a href="#" class="social-card twitter">
+              <div class="social-icon"></div>
+              <span>Twitter</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Копирайт -->
+      <div class="footer-bottom-modern">
+        <div class="copyright-content">
+          <p class="copyright">© 2025 SKYFALL. Все права защищены.</p>
+          <p class="made-with">Создано с <span class="heart"></span> для любителей Японии</p>
+        </div>
+        <div class="footer-decoration">
+          <div class="wave"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script>
+        // Создание плавающих частиц
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Улучшенные эффекты для кнопок
+        function initButtonEffects() {
+            // Эффект ripple для всех кнопок
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Анимация загрузки для кнопки калькулятора
+            const calcBtn = document.getElementById('calcBtn');
+            if (calcBtn) {
+                calcBtn.addEventListener('click', function() {
+                    this.classList.add('loading');
+                    this.disabled = true;
+                    
+                    // Симуляция загрузки
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                        this.disabled = false;
+                        // Здесь будет логика расчета стоимости
+                        showCalculationResult();
+                    }, 2000);
+                });
+            }
+
+            // Плавная прокрутка для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Функция показа результата расчета
+        function showCalculationResult() {
+            const result = document.getElementById('calcResult');
+            if (result) {
+                const price = Math.floor(Math.random() * 50000) + 100000;
+                result.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <h3 style="color: #C16548; margin-bottom: 10px;">💰 Примерная стоимость</h3>
+                        <p style="font-size: 24px; font-weight: bold; color: #1a1a1a;">${price.toLocaleString()} ₽</p>
+                        <p style="color: #666; margin-top: 10px;">*Точная стоимость будет рассчитана после консультации</p>
+                    </div>
+                `;
+                result.classList.add('show');
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initButtonEffects();
+            // Подсветка курсора на карточке калькулятора
+            const calcCard = document.querySelector('.booking-section .calc-card');
+            if (calcCard) {
+                calcCard.addEventListener('mousemove', (e) => {
+                    const r = calcCard.getBoundingClientRect();
+                    const x = ((e.clientX - r.left) / r.width) * 100 + '%';
+                    const y = ((e.clientY - r.top) / r.height) * 100 + '%';
+                    calcCard.style.setProperty('--mx', x);
+                    calcCard.style.setProperty('--my', y);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Adamina&family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Boldonse&family=Forum&family=Kaisei+Decol&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oranienbaum&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Skyfall — О компании</title>
+    <script src="../assets/js/main.js" defer></script>
+    <style>
+        /* Современная стеклянная навигация */
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Стили для навигационных ссылок */
+        .navbar .nav-links a {
+            color: rgba(0, 0, 0, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .navbar .nav-links a:hover {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Стили для логотипа */
+        .navbar .logo {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Активная ссылка */
+        .navbar .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        /* Стили для контейнера навигации */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            gap: 40px;
+        }
+        
+        .navbar .nav-links:first-child {
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .navbar .logo {
+            flex: 0 0 auto;
+            margin: 0;
+        }
+        
+        .navbar .nav-links:last-child {
+            flex: 1;
+            justify-content: flex-start;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+                height: 80px;
+                gap: 15px;
+            }
+            
+            .navbar .nav-links {
+                display: none;
+            }
+            
+            .navbar .logo {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 15px;
+                height: 70px;
+                gap: 10px;
+            }
+            
+            .navbar .logo {
+                font-size: 24px;
+            }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Современная стеклянная навигация -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index2.html" class="active">О компании</a>
+            <a href="index3.html">Визы</a>
+        </div>
+        <a href="../index.html" class="logo">SKYFALL</a>
+        <div class="nav-links">
+            <a href="tours.html">Туры</a>
+            <a href="index5.html">Путеводитель</a>
+            <a href="contact.html">Контакты</a>
+        </div>
+    </nav>
+
+    <!-- Бургер-меню для мобильных -->
+    <div class="burger-menu" id="burgerMenu">
+        <div class="burger-icon" id="burgerIcon">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" class="logo">skyfall</a>
+        <div class="nav-links">
+            <a href="index2.html">О КОМПАНИИ</a>
+            <a href="index3.html">ВИЗА</a>
+            <a href="tours.html">ТУРЫ</a>
+            <a href="index5.html">ПУТЕВОДИТЕЛЬ</a>
+            <a href="contact.html">КОНТАКТЫ</a>
+        </div>
+    </div>
+
+    <!-- Оверлей для мобильного меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-background">
+            <video class="hero-video" src="../img/IMG_0821.MP4" autoplay muted loop playsinline></video>
+            <div class="hero-overlay"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1 class="about-title">
+                <span class="title-line-1">О нашей</span>
+                <span class="title-line-2 japan-text">компании</span>
+            </h1>
+            <p class="hero-subtitle">Мы — команда энтузиастов, влюбленных в Японию и готовых поделиться этой любовью с вами</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">лет опыта</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1500+</div>
+                    <div class="stat-label">довольных клиентов</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">уникальных туров</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="about-sections mission-section">
+        <div class="about-section">
+            <div class="section-header">
+                <h2>Наша миссия</h2>
+                <p>Открыть для вас удивительный мир Страны восходящего солнца</p>
+            </div>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <h3>Трансформационные путешествия</h3>
+                    <p>Мы создаем не просто туры, а путешествия, которые изменят ваше представление о мире</p>
+                </div>
+                <div class="mission-card">
+                    <h3>От древнего к современному</h3>
+                    <p>От древних храмов Киото до неоновых улиц Токио, от традиционных онсэнов до современных технологий</p>
+                </div>
+                <div class="mission-card">
+                    <h3>Незабываемые впечатления</h3>
+                    <p>Каждое путешествие наполнено открытиями, эмоциями и новыми друзьями</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Timeline -->
+    <section class="about-sections">
+        <div class="about-section">
+            <div class="section-header">
+                <h2>Наша история</h2>
+                <p>Путь от мечты до признанного лидера в туризме по Японии</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3>Основание компании</h3>
+                        <p>Skyfall была основана группой энтузиастов, объединенных любовью к Японии</p>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="../img/photo11.jpg" alt="Основание">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-content">
+                        <h3>Первый тур</h3>
+                        <p>Провели первый групповой тур в Токио для 15 путешественников</p>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="../img/photo22.jpg" alt="Первый тур">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-content">
+                        <h3>Расширение программ</h3>
+                        <p>Добавили туры в Киото, Осаку и на остров Хоккайдо</p>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="../img/photo33.jpg" alt="Расширение">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-content">
+                        <h3>1000+ клиентов</h3>
+                        <p>Достигли отметки в 1000 довольных клиентов</p>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="../img/photo44.jpg" alt="1000 клиентов">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-content">
+                        <h3>Инновации</h3>
+                        <p>Внедрили VR-туры и индивидуальные программы</p>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="../img/photo55.jpg" alt="Инновации">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="about-sections">
+        <div class="about-section">
+            <div class="section-header">
+                <h2>Наша команда</h2>
+                <p>Опытные гиды, которые живут и дышат японской культурой</p>
+            </div>
+            <div class="cards-grid">
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="../img/photo11.jpg" alt="Наша команда">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Эксперты по Японии</h3>
+                        <p>Каждый из нас провел в этой стране годы, изучая её культуру, традиции и современную жизнь.</p>
+                        <div class="card-features">
+                            <span class="feature"> Опыт 5+ лет</span>
+                            <span class="feature"> Знание всех регионов</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="../img/photo22.jpg" alt="Персонализация">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Персонализированный подход</h3>
+                        <p>Мы создаем уникальные программы для каждого клиента, учитывая ваши интересы и пожелания.</p>
+                        <div class="card-features">
+                            <span class="feature"> Индивидуальные туры</span>
+                            <span class="feature"> Забота о деталях</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="../img/photo33.jpg" alt="Поддержка">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Поддержка 24/7</h3>
+                        <p>Мы с вами на протяжении всего путешествия — от планирования до возвращения домой.</p>
+                        <div class="card-features">
+                            <span class="feature"> Круглосуточная поддержка</span>
+                            <span class="feature"> Личный менеджер</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="about-sections">
+        <div class="about-section">
+            <div class="section-header">
+                <h2>Наши ценности</h2>
+                <p>Принципы, которыми мы руководствуемся в работе</p>
+            </div>
+            <div class="values-grid">
+                <div class="season-card spring">
+                    <div class="season-icon"></div>
+                    <h3>Аутентичность</h3>
+                    <div class="season-period">Настоящая Япония</div>
+                    <div class="season-desc">Показываем настоящую Японию, а не туристические клише</div>
+                </div>
+                
+                <div class="season-card summer">
+                    <div class="season-icon"></div>
+                    <h3>Доверие</h3>
+                    <div class="season-period">Честность</div>
+                    <div class="season-desc">Прозрачность во всех аспектах работы</div>
+                </div>
+                
+                <div class="season-card autumn">
+                    <div class="season-icon"></div>
+                    <h3>Качество</h3>
+                    <div class="season-period">Только лучшее</div>
+                    <div class="season-desc">Лучшие отели, рестораны и впечатления</div>
+                </div>
+                
+                <div class="season-card winter">
+                    <div class="season-icon"></div>
+                    <h3>Забота</h3>
+                    <div class="season-period">24/7 поддержка</div>
+                    <div class="season-desc">Поддержка на протяжении всего путешествия</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="about-sections">
+        <div class="about-section">
+            <div class="section-header">       
+                <h2>Наши достижения</h2>
+                <p>Цифры, которые говорят сами за себя</p>
+            </div>
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <div class="transport-icon"></div>
+                    <h3>1500+</h3>
+                    <p>Довольных клиентов</p>
+                    <div class="transport-pros">
+                        <span>Высокое качество</span>
+                        <span>Индивидуальный подход</span>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <div class="transport-icon"></div>
+                    <h3>50+</h3>
+                    <p>Уникальных туров</p>
+                    <div class="transport-pros">
+                        <span>Разнообразие</span>
+                        <span>Эксклюзивные маршруты</span>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <div class="transport-icon"></div>
+                    <h3>5</h3>
+                    <p>Лет опыта</p>
+                    <div class="transport-pros">
+                        <span>Экспертность</span>
+                        <span>Проверенные партнеры</span>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <div class="transport-icon"></div>
+                    <h3>98%</h3>
+                    <p>Положительных отзывов</p>
+                    <div class="transport-pros">
+                        <span>Доверие клиентов</span>
+                        <span>Высокий рейтинг</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="guide-final">
+        <div class="final-content">
+            <div class="final-text-container">
+                <h2>Готовы открыть Японию вместе с нами?</h2>
+                <p>Присоединяйтесь к тысячам путешественников, которые уже открыли для себя магию Страны восходящего солнца</p>
+                <div class="highlight-text">
+                    <strong>Каждое путешествие — это история, написанная специально для вас</strong>
+                </div>
+                <div class="cta-buttons">
+                    <a href="tours.html" class="cta-btn primary">Выбрать тур</a>
+                    <a href="contact.html" class="cta-btn secondary">Связаться с нами</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- Новый красивый футер -->
+  <footer class="modern-footer">
+    <!-- Анимированный фон с частицами -->
+    <div class="footer-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Градиентный переход -->
+    <div class="footer-gradient"></div>
+    
+    <!-- Основной контент футера -->
+    <div class="footer-content">
+      <div class="footer-main">
+        <!-- Логотип и описание -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="logo-text">SKYFALL</span>
+            <div class="logo-accent"></div>
+          </div>
+          <p class="brand-tagline">Путешествия в Японию</p>
+          <p class="brand-description">Откройте для себя страну восходящего солнца</p>
+          <div class="brand-decoration"></div>
+        </div>
+
+        <!-- Навигация -->
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul class="nav-links">
+            <li><a href="index2.html" class="nav-link">О компании</a></li>
+            <li><a href="index3.html" class="nav-link">Визы</a></li>
+            <li><a href="tours.html" class="nav-link">Туры</a></li>
+            <li><a href="index5.html" class="nav-link">Путеводитель</a></li>
+            <li><a href="contact.html" class="nav-link">Контакты</a></li>
+          </ul>
+        </div>
+
+        <!-- Контакты -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon phone">📞</div>
+              <span>8 (800) 700-85-49</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon email">✉️</div>
+              <a href="mailto:info@skyfall.ru">info@skyfall.ru</a>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon location">📍</div>
+              <span>г. Санкт-Петербург, ул. Ивана Зубкова, 10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Социальные сети -->
+        <div class="footer-social">
+          <h4>Социальные сети</h4>
+          <div class="social-grid">
+            <a href="#" class="social-card telegram">
+              <div class="social-icon"></div>
+              <span>Telegram</span>
+            </a>
+            <a href="#" class="social-card vk">
+              <div class="social-icon"></div>
+              <span>VK</span>
+            </a>
+            <a href="#" class="social-card instagram">
+              <div class="social-icon"></div>
+              <span>Instagram</span>
+            </a>
+            <a href="#" class="social-card twitter">
+              <div class="social-icon"></div>
+              <span>Twitter</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Копирайт -->
+      <div class="footer-bottom-modern">
+        <div class="copyright-content">
+          <p class="copyright">© 2025 SKYFALL. Все права защищены.</p>
+          <p class="made-with">Создано с <span class="heart"></span> для любителей Японии</p>
+        </div>
+        <div class="footer-decoration">
+          <div class="wave"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

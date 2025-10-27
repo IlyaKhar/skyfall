@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyfall — Туры в Японию</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Forum&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <style>
+        /* Белая стеклянная тема с крутыми анимациями */
+        body {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.9) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(248, 250, 252, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(241, 245, 249, 0.6) 0%, transparent 50%),
+                linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #e2e8f0 50%, #cbd5e1 75%, #ffffff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Плавающие частицы */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 12s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .particle:nth-child(odd) {
+            animation-delay: -4s;
+            background: rgba(248, 250, 252, 0.6);
+        }
+
+        .particle:nth-child(even) {
+            animation-delay: -8s;
+            background: rgba(241, 245, 249, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Современная стеклянная навигация */
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Стили для навигационных ссылок */
+        .navbar .nav-links a {
+            color: rgba(0, 0, 0, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .navbar .nav-links a:hover {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        
+        /* Стили для логотипа */
+        .navbar .logo {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        
+        .navbar .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Активная ссылка */
+        .navbar .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        
+        /* Стили для контейнера навигации */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            gap: 40px;
+        }
+        
+        .navbar .nav-links:first-child {
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .navbar .logo {
+            flex: 0 0 auto;
+            margin: 0;
+        }
+        
+        .navbar .nav-links:last-child {
+            flex: 1;
+            justify-content: flex-start;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+                height: 80px;
+                gap: 15px;
+            }
+            
+            .navbar .nav-links {
+                display: none;
+            }
+            
+            .navbar .logo {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 15px;
+                height: 70px;
+                gap: 10px;
+            }
+            
+            .navbar .logo {
+                font-size: 24px;
+            }
+        }
+
+        /* Главный контейнер */
+        .tours-hero {
+            padding: 120px 20px 80px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .tours-hero h1 {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 700;
+            color: #000000;
+            margin: 0 0 30px 0;
+            font-family: 'Oswald', sans-serif;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .tours-hero p {
+            font-size: clamp(18px, 2.5vw, 28px);
+            color: #2d3748;
+            margin: 0 0 50px 0;
+            max-width: 800px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        /* Стеклянные карточки туров */
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tour-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out both;
+        }
+
+        .tour-card:nth-child(1) { animation-delay: 0.1s; }
+        .tour-card:nth-child(2) { animation-delay: 0.2s; }
+        .tour-card:nth-child(3) { animation-delay: 0.3s; }
+        .tour-card:nth-child(4) { animation-delay: 0.4s; }
+        .tour-card:nth-child(5) { animation-delay: 0.5s; }
+        .tour-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        .tour-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .tour-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+            pointer-events: none; /* не блокировать клики по кнопке */
+        }
+
+        .tour-card:hover::before {
+            left: 100%;
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.4s ease;
+        }
+
+        .tour-card:hover .tour-image {
+            transform: scale(1.05);
+        }
+
+        .tour-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 15px 0;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .tour-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0 0 20px 0;
+            font-size: 16px;
+        }
+
+        .tour-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0 0 20px 0;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .tour-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+
+        .tour-features li {
+            color: #4a5568;
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .tour-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .tour-btn {
+            width: 100%;
+            padding: 15px 25px;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tour-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .tour-btn:hover::before {
+            left: 100%;
+        }
+
+        .tour-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Анимированные иконки */
+        .tour-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Секция с дополнительной информацией */
+        .info-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 80px auto;
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-section h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: #1a1a1a;
+            margin: 0 0 30px 0;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .info-section p {
+            font-size: 18px;
+            color: #4a5568;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .tours-hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 100px 20px 60px;
+            }
+            
+            .tours-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+            
+            .tour-card {
+                padding: 20px;
+            }
+            
+            .info-section {
+                padding: 40px 20px;
+                margin: 60px auto;
+            }
+        }
+
+        /* Дополнительные анимации */
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .rotate {
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ===== Modal (Подробнее о туре) ===== */
+        .tour-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .tour-modal {
+            width: min(800px, 92vw);
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .tour-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .tour-modal-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            margin: 0;
+            color: #1a1a1a;
+        }
+
+        .tour-modal-close {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.08);
+            width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer;
+        }
+
+        .tour-modal-body { padding: 18px 22px; color: #4a5568; line-height: 1.6; }
+        .tour-modal-features { margin: 12px 0 0 0; padding-left: 18px; }
+        .tour-modal-price { font-family: 'Oswald', sans-serif; font-size: 22px; color: #2d3748; margin-top: 10px; }
+
+        .tour-modal-footer {
+            display: flex; gap: 12px; justify-content: flex-end;
+            padding: 16px 22px; border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .tour-modal-overlay.active { display: flex; }
+        .tour-modal-overlay.active .tour-modal { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <!-- Плавающие частицы -->
+    <div class="floating-particles">
+        <div class="particle" style="left: 10%; top: 20%; animation-duration: 8s;"></div>
+        <div class="particle" style="left: 20%; top: 80%; animation-duration: 12s;"></div>
+        <div class="particle" style="left: 30%; top: 40%; animation-duration: 10s;"></div>
+        <div class="particle" style="left: 40%; top: 60%; animation-duration: 14s;"></div>
+        <div class="particle" style="left: 50%; top: 30%; animation-duration: 9s;"></div>
+        <div class="particle" style="left: 60%; top: 70%; animation-duration: 11s;"></div>
+        <div class="particle" style="left: 70%; top: 50%; animation-duration: 13s;"></div>
+        <div class="particle" style="left: 80%; top: 25%; animation-duration: 7s;"></div>
+        <div class="particle" style="left: 90%; top: 75%; animation-duration: 15s;"></div>
+    </div>
+
+    <!-- Навигация -->
+    <!-- Современная стеклянная навигация -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index2.html">О компании</a>
+            <a href="index3.html">Визы</a>
+        </div>
+        <a href="../index.html" class="logo">SKYFALL</a>
+        <div class="nav-links">
+            <a href="tours.html" class="active">Туры</a>
+            <a href="index5.html">Путеводитель</a>
+            <a href="contact.html">Контакты</a>
+        </div>
+    </nav>
+
+    <!-- Бургер-меню для мобильных -->
+    <div class="burger-menu" id="burgerMenu">
+        <div class="burger-icon" id="burgerIcon">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" class="logo">skyfall</a>
+        <div class="nav-links">
+            <a href="index2.html">О КОМПАНИИ</a>
+            <a href="index3.html">ВИЗА</a>
+            <a href="tours.html">ТУРЫ</a>
+            <a href="index5.html">ПУТЕВОДИТЕЛЬ</a>
+            <a href="contact.html">КОНТАКТЫ</a>
+        </div>
+    </div>
+
+    <!-- Оверлей для мобильного меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Главная секция -->
+    <div class="tours-hero">
+        <div class="hero-text">
+            <h1>ТУРЫ В ЯПОНИЮ</h1>
+            <p>Откройте для себя удивительную страну восходящего солнца с нашими эксклюзивными турами. Каждое путешествие — это уникальная история, которую вы создаете вместе с нами.</p>
+        </div>
+        <div class="hero-image-container">
+            <img src="../img/phot1.jpg" alt="Туры в Японию" class="hero-image">
+        </div>
+    </div>
+
+    <!-- Сетка туров -->
+    <div class="tours-grid" id="toursGrid">
+        <!-- Тур 1 -->
+        <div class="tour-card">
+            <img src="../img/phot1.jpg" alt="Классическая Япония" class="tour-image">
+            <h3 class="tour-title">Классическая Япония</h3>
+            <p class="tour-description">Погрузитесь в традиционную культуру Японии. Посетите древние храмы, сады камней и попробуйте настоящую японскую кухню.</p>
+            <div class="tour-price">от 150 000 ₽</div>
+            <ul class="tour-features">
+                <li>Токио - 4 дня</li>
+                <li>Киото - 3 дня</li>
+                <li>Осака - 2 дня</li>
+                <li>Экскурсии с гидом</li>
+                <li>Завтраки включены</li>
+            </ul>
+            <button class="tour-btn" 
+                data-title="Классическая Япония" 
+                data-price="от 150 000 ₽" 
+                data-desc="Погрузитесь в традиционную культуру Японии: храмы, сады камней и кухня."
+            >Выбрать тур</button>
+        </div>
+
+        <!-- Тур 2 -->
+        <div class="tour-card">
+            <img src="../img/phot2.jpg" alt="Сакура в Японии" class="tour-image">
+            <h3 class="tour-title">Сакура в Японии</h3>
+            <p class="tour-description">Станьте свидетелем самого красивого времени года в Японии. Ханами, пикники под цветущими деревьями и романтические прогулки.</p>
+            <div class="tour-price">от 180 000 ₽</div>
+            <ul class="tour-features">
+                <li>Сезон цветения сакуры</li>
+                <li>Токио - 5 дней</li>
+                <li>Фудзи - 2 дня</li>
+                <li>Фотосессия с сакурой</li>
+                <li>Традиционные ужины</li>
+            </ul>
+            <button class="tour-btn"
+                data-title="Сакура в Японии"
+                data-price="от 180 000 ₽"
+                data-desc="Ханами, пикники под цветущими деревьями и романтические прогулки."
+            >Выбрать тур</button>
+        </div>
+
+        <!-- Тур 3 -->
+        <div class="tour-card">
+            <img src="../img/phot3.jpg" alt="Горы и онсэны" class="tour-image">
+            <h3 class="tour-title">Горы и онсэны</h3>
+            <p class="tour-description">Отдохните в горячих источниках, насладитесь горными пейзажами и почувствуйте настоящую японскую релаксацию.</p>
+            <div class="tour-price">от 200 000 ₽</div>
+            <ul class="tour-features">
+                <li>Хаконе - 3 дня</li>
+                <li>Онсэны каждый день</li>
+                <li>Гора Фудзи</li>
+                <li>Традиционные рёканы</li>
+                <li>Каисэки ужины</li>
+            </ul>
+            <button class="tour-btn"
+                data-title="Горы и онсэны"
+                data-price="от 200 000 ₽"
+                data-desc="Горные пейзажи, горячие источники и настоящий дзен-отдых."
+            >Выбрать тур</button>
+        </div>
+
+        <!-- Тур 4 -->
+        <div class="tour-card">
+            <img src="../img/photo11.jpg" alt="Кулинарный тур" class="tour-image">
+            <h3 class="tour-title">Кулинарный тур</h3>
+            <p class="tour-description">Изучите секреты японской кухни от мастеров. Мастер-классы по суши, дегустации саке и эксклюзивные рестораны.</p>
+            <div class="tour-price">от 220 000 ₽</div>
+            <ul class="tour-features">
+                <li>Мастер-классы по суши</li>
+                <li>Дегустация саке</li>
+                <li>Рыбный рынок Цукидзи</li>
+                <li>Мишленовские рестораны</li>
+                <li>Кулинарные экскурсии</li>
+            </ul>
+            <button class="tour-btn"
+                data-title="Кулинарный тур"
+                data-price="от 220 000 ₽"
+                data-desc="Секреты японской кухни от мастеров: суши, саке и high-end рестораны."
+            >Выбрать тур</button>
+        </div>
+
+        <!-- Тур 5 -->
+        <div class="tour-card">
+            <img src="../img/photo22.jpg" alt="Современная Япония" class="tour-image">
+            <h3 class="tour-title">Современная Япония</h3>
+            <p class="tour-description">Познакомьтесь с высокотехнологичной стороной Японии. Роботы, неоновые улицы и инновации будущего.</p>
+            <div class="tour-price">от 190 000 ₽</div>
+            <ul class="tour-features">
+                <li>Токио - 6 дней</li>
+                <li>Район Сибуя</li>
+                <li>Музей роботов</li>
+                <li>Технологические центры</li>
+                <li>Современная архитектура</li>
+            </ul>
+            <button class="tour-btn"
+                data-title="Современная Япония"
+                data-price="от 190 000 ₽"
+                data-desc="Неоновые улицы, роботы и инновации будущего."
+            >Выбрать тур</button>
+        </div>
+
+        <!-- Тур 6 -->
+        <div class="tour-card">
+            <img src="../img/photo33.jpg" alt="Духовная Япония" class="tour-image">
+            <h3 class="tour-title">Духовная Япония</h3>
+            <p class="tour-description">Найдите внутренний покой в древних храмах и монастырях. Медитация, дзен-буддизм и духовные практики.</p>
+            <div class="tour-price">от 170 000 ₽</div>
+            <ul class="tour-features">
+                <li>Храмы Киото</li>
+                <li>Медитация с монахами</li>
+                <li>Чайная церемония</li>
+                <li>Дзен-сады</li>
+                <li>Духовные практики</li>
+            </ul>
+            <button class="tour-btn"
+                data-title="Духовная Япония"
+                data-price="от 170 000 ₽"
+                data-desc="Медитация, храмы и практики для внутренней гармонии."
+            >Выбрать тур</button>
+        </div>
+    </div>
+
+    <!-- Кнопка показать еще -->
+    <div style="display:flex; justify-content:center; margin-top: 24px;">
+        <button id="showMoreTours" class="cta-btn secondary" style="padding:14px 28px; border-radius:12px;">
+            Показать ещё
+        </button>
+    </div>
+
+    <!-- Дополнительная информация -->
+    <div class="info-section">
+        <h2>Почему выбирают нас?</h2>
+        <p>Мы создаем не просто туры, а незабываемые истории. Каждое путешествие тщательно спланировано нашими экспертами, которые знают Японию изнутри. От момента бронирования до возвращения домой — мы заботимся о каждом детале вашего путешествия.</p>
+        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap;">
+            <div style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 10px;"></div>
+                <div style="font-weight: 600; color: #1a1a1a;">Лучшие гиды</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 10px;"></div>
+                <div style="font-weight: 600; color: #1a1a1a;">Удобные перелеты</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 10px;"></div>
+                <div style="font-weight: 600; color: #1a1a1a;">Премиум отели</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 10px;"></div>
+                <div style="font-weight: 600; color: #1a1a1a;">Полная поддержка</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal markup -->
+    <div class="tour-modal-overlay" id="tourModalOverlay" aria-hidden="true">
+        <div class="tour-modal" role="dialog" aria-modal="true" aria-labelledby="tourModalTitle">
+            <div class="tour-modal-header">
+                <h3 class="tour-modal-title" id="tourModalTitle">Тур</h3>
+                <button class="tour-modal-close" id="tourModalClose" aria-label="Закрыть">✕</button>
+            </div>
+            <div class="tour-modal-body">
+                <div id="tourModalDesc"></div>
+                <ul id="tourModalFeatures" class="tour-modal-features"></ul>
+                <div id="tourModalPrice" class="tour-modal-price"></div>
+            </div>
+            <div class="tour-modal-footer">
+                <a href="booking.html" class="btn-secondary" id="tourModalBook">Забронировать</a>
+                <button class="btn-primary" id="tourModalClose2">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Дополнительные интерактивные эффекты
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация при скролле
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            // Наблюдаем за карточками
+            document.querySelectorAll('.tour-card').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Эффект параллакса для частиц
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const particles = document.querySelectorAll('.particle');
+                
+                particles.forEach((particle, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    particle.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+
+            // Интерактивные эффекты для кнопок
+            document.querySelectorAll('.tour-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Модалка «Подробнее о туре»
+            const overlay = document.getElementById('tourModalOverlay');
+            const closeBtn = document.getElementById('tourModalClose');
+            const closeBtn2 = document.getElementById('tourModalClose2');
+            const titleEl = document.getElementById('tourModalTitle');
+            const descEl = document.getElementById('tourModalDesc');
+            const priceEl = document.getElementById('tourModalPrice');
+            const featuresEl = document.getElementById('tourModalFeatures');
+            const bookBtn = document.getElementById('tourModalBook');
+
+            function openModal(btn){
+                const card = btn.closest('.tour-card');
+                const title = btn.getAttribute('data-title') || (card?.querySelector('.tour-title')?.textContent || 'Тур');
+                const price = btn.getAttribute('data-price') || (card?.querySelector('.tour-price')?.textContent || '');
+                const desc = btn.getAttribute('data-desc') || (card?.querySelector('.tour-description')?.textContent || '');
+                const features = Array.from(card?.querySelectorAll('.tour-features li') || []).map(li => li.textContent);
+
+                titleEl.textContent = title;
+                descEl.textContent = desc;
+                priceEl.textContent = price;
+                featuresEl.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+                // ссылка на бронирование
+                bookBtn.setAttribute('href', 'booking.html');
+
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden','false');
+            }
+
+            function closeModal(){
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden','true');
+            }
+
+            document.querySelectorAll('.tour-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal(btn);
+                });
+            });
+
+            closeBtn && closeBtn.addEventListener('click', closeModal);
+            closeBtn2 && closeBtn2.addEventListener('click', closeModal);
+            overlay && overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+            });
+        });
+    </script>
+  <!-- Новый красивый футер -->
+  <footer class="modern-footer">
+    <!-- Анимированный фон с частицами -->
+    <div class="footer-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Градиентный переход -->
+    <div class="footer-gradient"></div>
+    
+    <!-- Основной контент футера -->
+    <div class="footer-content">
+      <div class="footer-main">
+        <!-- Логотип и описание -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="logo-text">SKYFALL</span>
+            <div class="logo-accent"></div>
+          </div>
+          <p class="brand-tagline">Путешествия в Японию</p>
+          <p class="brand-description">Откройте для себя страну восходящего солнца</p>
+          <div class="brand-decoration"></div>
+        </div>
+
+        <!-- Навигация -->
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul class="nav-links">
+            <li><a href="index2.html" class="nav-link">О компании</a></li>
+            <li><a href="index3.html" class="nav-link">Визы</a></li>
+            <li><a href="tours.html" class="nav-link">Туры</a></li>
+            <li><a href="index5.html" class="nav-link">Путеводитель</a></li>
+            <li><a href="contact.html" class="nav-link">Контакты</a></li>
+          </ul>
+        </div>
+
+        <!-- Контакты -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon phone">📞</div>
+              <span>8 (800) 700-85-49</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon email">✉️</div>
+              <a href="mailto:info@skyfall.ru">info@skyfall.ru</a>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon location">📍</div>
+              <span>г. Санкт-Петербург, ул. Ивана Зубкова, 10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Социальные сети -->
+        <div class="footer-social">
+          <h4>Социальные сети</h4>
+          <div class="social-grid">
+            <a href="#" class="social-card telegram">
+              <div class="social-icon"></div>
+              <span>Telegram</span>
+            </a>
+            <a href="#" class="social-card vk">
+              <div class="social-icon"></div>
+              <span>VK</span>
+            </a>
+            <a href="#" class="social-card instagram">
+              <div class="social-icon"></div>
+              <span>Instagram</span>
+            </a>
+            <a href="#" class="social-card twitter">
+              <div class="social-icon"></div>
+              <span>Twitter</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Копирайт -->
+      <div class="footer-bottom-modern">
+        <div class="copyright-content">
+          <p class="copyright">© 2025 SKYFALL. Все права защищены.</p>
+          <p class="made-with">Создано с <span class="heart"></span> для любителей Японии</p>
+        </div>
+        <div class="footer-decoration">
+          <div class="wave"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
